@@ -1,0 +1,67 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "title": "Samsung Galaxy 1",
+      "description": "Прекрасный, большой, красивый",
+      "preview": "",
+      "category": 1,
+      "price": 54000.0,
+      "date_create": "2023-09-09",
+      "date_last_change": "2023-09-09"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "title": "Чайник Scarlet 1251",
+      "description": "",
+      "preview": "",
+      "category": 2,
+      "price": 2200.0,
+      "date_create": "2023-09-09",
+      "date_last_change": "2023-09-09"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "title": "Холодильник Bosch 33",
+      "description": "Огромный как скала",
+      "preview": "",
+      "category": 3,
+      "price": 90000.0,
+      "date_create": "2023-09-09",
+      "date_last_change": "2023-09-09"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "title": "Honor 20i",
+      "description": "Большой как скала",
+      "preview": "",
+      "category": 1,
+      "price": 20000.0,
+      "date_create": "2023-09-09",
+      "date_last_change": "2023-09-09"
+    }
+  },
+    {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "title": "Мотор Genry",
+      "description": "",
+      "preview": "",
+      "category": 4,
+      "price": 40000.0,
+      "date_create": "2023-09-09",
+      "date_last_change": "2023-09-09"
+    }
+  }
+]
