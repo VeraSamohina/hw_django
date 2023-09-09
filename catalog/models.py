@@ -23,7 +23,6 @@ class Product(models.Model):
     price = models.FloatField(verbose_name='Цена')
     date_create = models.DateField(auto_now_add=True, verbose_name='Дата создания', )
     date_last_change = models.DateField(auto_now=True, verbose_name='Дата последнего изменения')
-    created_at = models.DateField(**NULLABLE)
 
     def __str__(self):
         return f'pk: {self.title}({self.price}, {self.category})'
