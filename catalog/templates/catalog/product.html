@@ -1,0 +1,20 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="card w-50 m-3 ">
+  <div class="card-header">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{overview}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Цена: {{price}} рублей</li>
+    <li class="list-group-item">Категория товара: {{category}} </li>
+    </ul>
+    <p class="card-text"><small class="text-body-secondary">Дата добавления {{date_create}}</small></p>
+  <div class="card-body">
+    <a href="#" class="btn btn-outline-primary my-2">В корзину</a>
+  </div>
+    </div>
+</div>
+{% endblock %}
