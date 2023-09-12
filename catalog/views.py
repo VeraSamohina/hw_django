@@ -22,13 +22,7 @@ def contacts(request):
 
 
 def product(request, pk):
-    product_item = Product.objects.get(pk=pk)
     context = {
-        'title': product_item.title,
-        'overview': product_item.description,
-        'price': product_item.price,
-        'category': product_item.category,
-        'date_create': product_item.date_create,
-        'date_change': product_item.date_last_change
+        'object': Product.objects.get(pk=pk),
     }
     return render(request, 'catalog/product.html', context)
