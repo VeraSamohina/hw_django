@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
@@ -26,9 +26,20 @@ class ArticleListView(ListView):
         'title': 'Наши статьи'
     }
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_published=True)
+        return queryset
+
 
 class ArticleDetailView(DetailView):
     model = Article
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.count_view += 1
+        self.object.save()
+        return self.object
 
 
 class ArticleUpdateView(UpdateView):
@@ -42,4 +53,17 @@ class ArticleUpdateView(UpdateView):
 class ArticleDeleteView(DeleteView):
     model = Article
     success_url = reverse_lazy('blog:blog')
+
+
+def toggle_published(request, pk):
+    article_item = get_object_or_404(Article, pk=pk)
+    if article_item.is_published:
+        article_item.is_published = False
+    else:
+        article_item.is_published = True
+    article_item.save()
+
+    return redirect(reverse('blog:blog'))
+
+
 
