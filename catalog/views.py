@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
-from catalog.models import Product, Category
+from catalog.models import Product
 
 
 class ProductListView(ListView):
@@ -26,4 +26,3 @@ def contacts(request):
         message = request.POST.get('message')
         print(f'You have new feedback from {name}({phone}): {message}')
     return render(request, 'catalog/contacts.html', context)
-

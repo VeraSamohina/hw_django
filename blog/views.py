@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
 
 from blog.models import Article
+from blog.service import send_congratulation
 
 
 class ArticleCreateView(CreateView):
@@ -39,6 +40,10 @@ class ArticleDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.count_view += 1
         self.object.save()
+
+        if self.object.count_view == 100:
+            send_congratulation(self.object.pk)
+        self.object.save()
         return self.object
 
 
@@ -64,6 +69,3 @@ def toggle_published(request, pk):
     article_item.save()
 
     return redirect(reverse('blog:blog'))
-
-
-
