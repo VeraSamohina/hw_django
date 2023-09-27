@@ -16,6 +16,9 @@
           <div class="card-body">
             <h1 class="card-title pricing-card-title">{{object.price}} рублей</h1>
             <p class="card-text">{{object.description|slice:":100"}}.</p>
+                {% if object.active_version %}
+              <p class="card-text">Активная версия: {{object.active_version}}</p>
+              {% endif %}
               <a href="{% url 'catalog:product_view' object.pk %}" class="btn btn-outline-primary my-2">Подробнее</a>
           </div>
         </div>
