@@ -1,14 +1,21 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
-from catalog.models import Product, Category
+from catalog.models import Product
 
 
-def home(request):
-    context = {
-        'object_list': Product.objects.all(),
+class ProductListView(ListView):
+    model = Product
+    extra_context = {
         'title': 'Магазин хороших товаров',
         'description': 'Предлагаем различные товары по привлекательным ценам'}
-    return render(request, 'catalog/homepage.html', context)
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    extra_context = {
+        'title': 'Информация о товаре',
+        }
 
 
 def contacts(request):
@@ -19,10 +26,3 @@ def contacts(request):
         message = request.POST.get('message')
         print(f'You have new feedback from {name}({phone}): {message}')
     return render(request, 'catalog/contacts.html', context)
-
-
-def product(request, pk):
-    context = {
-        'object': Product.objects.get(pk=pk),
-    }
-    return render(request, 'catalog/product.html', context)

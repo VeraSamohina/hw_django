@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'catalog',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -89,3 +90,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'samohinavera@yandex.ru'
+EMAIL_HOST_PASSWORD = os.environ.get('YANDEXPAS')
+EMAIL_USE_SSL = True
+# AsTSNVv7pun9' os.environ.get('YANDEXPAS')
