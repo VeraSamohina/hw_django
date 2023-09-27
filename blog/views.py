@@ -52,7 +52,7 @@ class ArticleUpdateView(UpdateView):
     fields = ('title', 'body', 'preview')
 
     def get_success_url(self):
-        return reverse('blog:article_view', args=[self.kwargs.get('pk')])
+        return reverse('blog:article_view', args=[self.kwargs.get('slug')])
 
 
 class ArticleDeleteView(DeleteView):
