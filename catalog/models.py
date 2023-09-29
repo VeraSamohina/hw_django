@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import UniqueConstraint, Q
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -16,6 +17,10 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    @property
+    def active_version(self):
+        return self.version_set.get(is_active=True)
+
     title = models.CharField(max_length=400, unique=True, verbose_name='Наименование')
     description = models.TextField(**NULLABLE, verbose_name='Описание')
     preview = models.ImageField(upload_to='photo/', **NULLABLE, verbose_name='Изображение')
@@ -44,3 +49,7 @@ class Version(models.Model):
     class Meta:
         verbose_name = 'версия'
         verbose_name_plural = 'версии'
+        constraints = (
+            UniqueConstraint(fields=['product'], condition=Q(is_active=True), name='unique_active_version',
+                             violation_error_message="Может быть только одна активная версия продукта"),
+        )

@@ -1,7 +1,7 @@
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
@@ -16,8 +16,6 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         object_list = Product.objects.all()[:6]
-        for object in object_list:
-            object.active_version = object.version_set.filter(is_active=True).first()
         context['object_list'] = object_list
         return context
 
@@ -50,7 +48,7 @@ class ProductUpdateView(UpdateView):
     form_class = ProductForm
 
     def get_success_url(self):
-        return reverse('catalog:product_view', args=[self.kwargs.get('pk')])
+        return reverse('catalog:product_edit', args=[self.kwargs.get('pk')])
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -71,24 +69,5 @@ class ProductUpdateView(UpdateView):
 
 
 class ProductDeleteView(DeleteView):
-    model = Product
-    success_url = reverse_lazy('catalog:home')
-
-
-class VersionCreateView(CreateView):
-    model = Version
-    form_class = VersionForm
-    success_url = reverse_lazy('catalog:home')
-
-
-class VersionUpdateView(UpdateView):
-    model = Version
-    form_class = VersionForm
-
-    def get_success_url(self):
-        return reverse('catalog:product_view', args=[self.kwargs.get('pk')])
-
-
-class VersionDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
