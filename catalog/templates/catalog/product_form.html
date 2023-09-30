@@ -1,7 +1,9 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
+<div class="container">
+
 <div class="col-12">
-<div class="row">
+    <form class="row justify-content-between" method="post" enctype="multipart/form-data">
      <div class="col-6">
          <div class="card">
              <div class="card-header">
@@ -12,7 +14,6 @@
                  {% endif %}
              </div>
              <div class="card-body">
-                 <form method="post" enctype="multipart/form-data">
                      {% csrf_token %}
                      {{form.as_p}}
                      <button type="submit" class="btn btn-info">
@@ -22,10 +23,24 @@
                      Создать
                      {% endif %}
                      </button>
-                 </form>
              </div>
          </div>
      </div>
-</div>
+        <div class="col-4">
+<div class="card">
+    <div class="card-header"> Версии </div>
+            <div class="card-body">
+                {{ formset.management_form }}
+                {% for form in formset.forms %}
+                {{ form.as_p }}
+                {% if not forloop.last %}
+                <hr>
+                {% endif %}
+                {% endfor %}
+                              </div>
+        </div>
+     </div>
+      </form>
+     </div>
     </div>
 {% endblock %}

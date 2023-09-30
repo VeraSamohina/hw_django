@@ -96,4 +96,5 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'samohinavera@yandex.ru'
 EMAIL_HOST_PASSWORD = os.environ.get('YANDEXPAS')
 EMAIL_USE_SSL = True
-# AsTSNVv7pun9' os.environ.get('YANDEXPAS')
+
+FORBIDDEN_WORDS = {'казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар'}
