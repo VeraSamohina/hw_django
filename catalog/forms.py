@@ -16,14 +16,14 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         fields = ('title', 'description', 'preview', 'category', 'price')
 
     def clean_title(self):
-        title = self.cleaned_data.get('title').lower()
-        if title in settings.FORBIDDEN_WORDS:
+        title = self.cleaned_data.get('title')
+        if title or title.lower() in settings.FORBIDDEN_WORDS:
             raise forms.ValidationError(f"Нельзя использовать запрещенные слова в названии продукта.")
         return title
 
     def clean_description(self):
-        description = self.cleaned_data.get('description').lower()
-        if description in settings.FORBIDDEN_WORDS:
+        description = self.cleaned_data.get('description')
+        if description or description.lower() in settings.FORBIDDEN_WORDS:
             raise forms.ValidationError(f"Нельзя использовать  запрещенные слова в описании продукта.")
         return description
 
@@ -32,10 +32,3 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = ('product', 'version_number', 'version_title', 'is_active')
-
-    # def clean(self):
-    #     cleaned_data = super(VersionForm, self).clean()
-    #     #self.validate_unique()
-    #     if not cleaned_data.is_valid():
-    #         raise forms.ValidationError(f"Может быть только одна активная версия продукта")
-    #     return cleaned_data
