@@ -17,13 +17,13 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data.get('title')
-        if title or title.lower() in settings.FORBIDDEN_WORDS:
+        if title.lower() in settings.FORBIDDEN_WORDS:
             raise forms.ValidationError(f"Нельзя использовать запрещенные слова в названии продукта.")
         return title
 
     def clean_description(self):
         description = self.cleaned_data.get('description')
-        if description or description.lower() in settings.FORBIDDEN_WORDS:
+        if description.lower() in settings.FORBIDDEN_WORDS:
             raise forms.ValidationError(f"Нельзя использовать  запрещенные слова в описании продукта.")
         return description
 
