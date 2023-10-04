@@ -19,6 +19,7 @@
                 {% if object.active_version %}
               <p class="card-text">Активная версия: {{object.active_version}}</p>
               {% endif %}
+              <p class="card-text">Владелец: {{object.owner|default:"без владельца"}}</p>
               <a href="{% url 'catalog:product_view' object.pk %}" class="btn btn-outline-primary my-2">Подробнее</a>
           </div>
         </div>
