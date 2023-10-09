@@ -1,9 +1,13 @@
-from pathlib import Path
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-4z-un7+v8q!%7dx43$ivh-zlc2sz10t=_$+h()9=m5apwp-o0p'
+load_dotenv(BASE_DIR / '.env')
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -57,7 +61,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'catalog',
         'USER': 'postgres',
-        'PASSWORD': os.environ.get('postgrespas')
+        'PASSWORD': os.getenv('DATABASE_PASSWORD')
     }
 }
 
@@ -94,8 +98,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'samohinavera@yandex.ru'
-EMAIL_HOST_PASSWORD = os.environ.get('YANDEXPAS')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 
 FORBIDDEN_WORDS = {'казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар'}
@@ -104,11 +108,11 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-CACHE_ENABLE = True
+CACHE_ENABLE = os.getenv('CACHE_ENABLE') == '1'
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379'
+        'LOCATION': os.getenv('CACHE_LOCATION')
     }
 }
